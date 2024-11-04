@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://b6ko0l6tlmpx2"]
+
+[ext_resource type="Texture2D" uid="uid://1d14xcgwu1tx" path="res://dodge_the_creeps_2d_assets/art/playerGrey_walk1.png" id="1_hso68"]
+[ext_resource type="Script" path="res://player.gd" id="1_thbp5"]
+[ext_resource type="Texture2D" uid="uid://dwxip4bs0eqpf" path="res://dodge_the_creeps_2d_assets/art/playerGrey_walk2.png" id="2_vu4nl"]
+[ext_resource type="Texture2D" uid="uid://bacaffidbxxhw" path="res://dodge_the_creeps_2d_assets/art/playerGrey_up1.png" id="4_hleo0"]
+[ext_resource type="Texture2D" uid="uid://defqm2ibiwlu0" path="res://dodge_the_creeps_2d_assets/art/playerGrey_up2.png" id="5_xl2le"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ea0ie"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hso68")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_vu4nl")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_hleo0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_xl2le")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7drvr"]
+radius = 27.0
+height = 70.0
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_thbp5")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_ea0ie")
+animation = &"up"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_7drvr")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
